@@ -1,17 +1,10 @@
 package com.proggettazione.richiesteConsapBE.service.impl;
 
-import com.proggettazione.richiesteConsapBE.dto.richiesteDto;
-import com.proggettazione.richiesteConsapBE.model.Richiesta;
-import com.proggettazione.richiesteConsapBE.model.Stato;
-import com.proggettazione.richiesteConsapBE.model.StatoApprovazione;
 import com.proggettazione.richiesteConsapBE.repository.RichiestaRepository;
-import com.proggettazione.richiesteConsapBE.repository.StatoRepository;
+import com.proggettazione.richiesteConsapBE.repository.StatoRichiestaConsapRepository;
 import com.proggettazione.richiesteConsapBE.service.RichiestaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 
 @Service
@@ -21,20 +14,21 @@ public class RichiestaServiceImpl implements RichiestaService {
     RichiestaRepository richiestaRepository;
 
     @Autowired
-    StatoServiceImpl statoServiceImpl;
+    StatoRichiestaConsapServiceImpl statoServiceImpl;
 
     @Autowired
-    StatoRepository statoRepository;
+    StatoRichiestaConsapRepository statoRichiestaConsapRepository;
 
     @Autowired
     UtenteServiceImpl utenteServiceImpl;
 
-    @Override
+  /*  @Override
 
     public Richiesta saveRichiesta(Richiesta richiesta) {
         Richiesta nuovaRichiesta = new Richiesta(
         );
-        Stato stato = statoRepository.findById(richiesta.getStato().getId())
+        Stato stato = statoRepository.
+                findById(richiesta.getStato().getId())
                 .orElse(null);
         nuovaRichiesta.setIdCommessa(richiesta.getIdCommessa());
         nuovaRichiesta.setStato(stato);
@@ -52,25 +46,7 @@ public class RichiestaServiceImpl implements RichiestaService {
         return richiestaRepository.save(nuovaRichiesta);
     }
 
-/*
-    @Override
-    public Richiesta saveRichieste(richiesteDto richiesteDto) {
-        Optional<Stato> optionalStato = statoRepository.findById(richiesteDto.getStatoId());
-        if (optionalStato.isEmpty()) {
-            return null;
-        }
-        Richiesta newRichesta = new Richiesta(richiesteDto.getIdCommessa(),
-                richiesteDto.getOggetto(), stato, richiesteDto.getDataCreazione(),
-                richiesteDto.getStatoApprovazione(), richiesteDto.getNote(),
-                richiesteDto.getCampo1(), richiesteDto.getCampo2(), richiesteDto.getCampo3(), richiesteDto.getCampo4(),
-                richiesteDto.getUtenteInserimento(), richiesteDto.getDataInserimento(),
-                richiesteDto.getUtenteModifica(), richiesteDto.getDataModifica());
-        richiestaRepository.save(newRichesta);
 
-
-        return richiestaRepository.save(newRichesta);
-    }
-    */
 
     @Override
     public List<Richiesta> getRichieste() {
@@ -100,6 +76,6 @@ public class RichiestaServiceImpl implements RichiestaService {
         existingRichiesta.setUtenteModifica(richiesta.getUtenteModifica());
         richiestaRepository.save(existingRichiesta);
         return existingRichiesta;
-    }
+    }*/
 
 }

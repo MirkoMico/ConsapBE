@@ -1,18 +1,13 @@
 package com.proggettazione.richiesteConsapBE.service.impl;
 
-import com.proggettazione.richiesteConsapBE.model.Richiesta;
-import com.proggettazione.richiesteConsapBE.model.Stato;
 import com.proggettazione.richiesteConsapBE.repository.RichiestaRepository;
-import com.proggettazione.richiesteConsapBE.repository.StatoRepository;
-import com.proggettazione.richiesteConsapBE.service.RichiestaService;
-import com.proggettazione.richiesteConsapBE.service.StatoService;
+import com.proggettazione.richiesteConsapBE.repository.StatoRichiestaConsapRepository;
+import com.proggettazione.richiesteConsapBE.service.StatoRichiestaConsapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.List;
-import java.util.Optional;
 
 @Service
-public class StatoServiceImpl implements StatoService {
+public class StatoRichiestaConsapServiceImpl implements StatoRichiestaConsapService {
 
 
 
@@ -20,16 +15,16 @@ public class StatoServiceImpl implements StatoService {
     RichiestaRepository richiestaRepository;
 
     @Autowired
-    StatoRepository statoRepository;
-    @Override
-    public List<Stato> getStati() {
+    StatoRichiestaConsapRepository statoRichiestaConsapRepository;
+  /*  @Override
+    public List<StatoRichiestaConsap> getStati() {
         return statoRepository.findAll();
     }
 
     @Override
-    public Stato saveStato(Stato stato) {
-        return statoRepository.save(stato);
-    }
+    public StatoRichiestaConsap saveStato(StatoRichiestaConsap statoRichiestaConsap) {
+        return statoRepository.save(statoRichiestaConsap);
+    }*/
 /*
     @Override
     public Stato getIdStatoByRichiesta(Richiesta richiesta) {
@@ -46,19 +41,19 @@ public class StatoServiceImpl implements StatoService {
         }
     }
     */
+    /*
 @Override
-public Stato getIdStatoByRichiesta(Richiesta richiesta) {
-    int statoId = richiesta.getStato().getId(); // Recupera l'ID dello stato dal JSON
-    Optional<Stato> optionalStato = statoRepository.findById(statoId); // Cerca lo stato nel database utilizzando l'ID
+public StatoRichiestaConsap getIdStatoByRichiesta(Richiesta richiesta) {
+    int statoId = richiesta.getStatoRichiestaConsap().getId(); // Recupera l'ID dello stato dal JSON
+    Optional<StatoRichiestaConsap> optionalStato = statoRepository.findById(statoId); // Cerca lo stato nel database utilizzando l'ID
 
     if (optionalStato.isPresent()) {
         return optionalStato.get(); // Restituisci lo stato trovato
     } else {
         // Gestisci il caso in cui lo stato non esiste nel database
         return null; // o altra logica di gestione dell'errore
-    }
+    }*/
 }
 
 
 
-}

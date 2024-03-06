@@ -1,6 +1,5 @@
 package com.proggettazione.richiesteConsapBE.service.impl;
 
-import com.proggettazione.richiesteConsapBE.model.StatoApprovazione;
 import com.proggettazione.richiesteConsapBE.model.Utente;
 import com.proggettazione.richiesteConsapBE.repository.UtenteRepository;
 import com.proggettazione.richiesteConsapBE.service.UtenteService;
@@ -30,16 +29,7 @@ public class UtenteServiceImpl implements UtenteService {
     public Utente saveUtente(Utente utente) {
         return utenteRepository.save(utente);
     }
-    @Override
-    public int setStatoApprovazione(String statoApprovazione) {
-        switch (statoApprovazione){
-            case "PENDING_APPROVAL":
-                return StatoApprovazione.PENDIG_APPROVAL.ordinal();
-            case "APPROVED":
-                return StatoApprovazione.APPROVED.ordinal();
-            default:
-                return -1;
-        }
-    }
+
+
 
 }

@@ -1,7 +1,6 @@
 package com.proggettazione.richiesteConsapBE.controller;
 
 import com.proggettazione.richiesteConsapBE.model.Richiesta;
-import com.proggettazione.richiesteConsapBE.model.Stato;
 import com.proggettazione.richiesteConsapBE.service.impl.RichiestaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +15,7 @@ public class RichiestaController {
 
     @Autowired
     RichiestaServiceImpl richiestaServiceImpl;
-    @GetMapping
+   /* @GetMapping
     @CrossOrigin(origins="http://localhost:4200", allowedHeaders = "*")
     public List<Richiesta> getAllRichieste(){
         return richiestaServiceImpl.getRichieste();
@@ -34,5 +33,5 @@ public class RichiestaController {
             System.out.println(statoId + "statoID");
             return new ResponseEntity<Richiesta>(richiestaServiceImpl.putRichiesta(richiesta,id
             ),HttpStatus.OK);
-        }
+        }*/
 }

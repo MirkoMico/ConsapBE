@@ -12,18 +12,31 @@ public class Richiesta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int idCommessa;
+    private int numeroTicket ;
     @ManyToOne
-    @JoinColumn(name="id_stato",referencedColumnName = "id")
-    private Stato stato;
-    private int statoApprovazione;
+    @JoinColumn(name="statoRichiestaConsapId",referencedColumnName = "statoRichiestaConsapId")
+    private StatoRichiestaConsap statoRichiestaConsap;
+    @ManyToOne
+    @JoinColumn(name = "applicativoId",referencedColumnName = "applicativoId")
+    private Applicativo applicativo;
+    @ManyToOne
+    @JoinColumn(name = "statoApprovazioneConsapId",referencedColumnName = "statoApprovazioneConsapId")
+    private StatoApprovazioneConsap statoApprovazioneConsap;
     private String oggetto;
     private Date dataCreazione;
-    private String note;
-    private String campo1;
-    private String campo2;
-    private String campo3;
-    private String campo4;
+    @ManyToOne
+    @JoinColumn(name = "statoApprovazioneOsId",referencedColumnName = "statoApprovazioneOsId")
+    private StatoApprovazioneOs statoApprovazioneOs;
+    @ManyToOne
+    @JoinColumn(name = "statoRichiestaOsId",referencedColumnName = "statoRichiestaOsId")
+    private StatoRichiestaOs statoRichiestaOS;
+    private Date dataStimaFinale;
+    private double importo;
+    @ManyToOne
+    @JoinColumn(name = "commessaOSId",referencedColumnName = "commessaOSId")
+    private CommessaOs commessaOs;
+
+
     private String UtenteCreazione;
     private String UtenteModifica;
     private Date dataInserimento;

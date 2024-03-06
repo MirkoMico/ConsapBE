@@ -10,5 +10,5 @@ public interface UtenteService {
     List<Utente> getUtenti();
     Utente saveUtente(Utente utente);
 
-     int setStatoApprovazione(String statoApprovazione);
+
 }
