@@ -7,15 +7,16 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Optional;
+
 @Repository
 public interface RichiestaRepository extends JpaRepository<Richiesta,Integer> {
-    @Modifying
-    @Transactional
-    @Query(value = "ALTER TABLE richiesta ADD CONSTRAINT stato_approvazione_check CHECK (id_stato BETWEEN 0 AND 3)", nativeQuery = true)
-    void addStatoConstraint();
+    Optional<Richiesta> findByNumeroTicket(int numeroTicket);
 
-    @Modifying
-    @Transactional
-    @Query(value = "ALTER TABLE richiesta ADD CONSTRAINT stato_approvazione_check CHECK (stato_approvazione BETWEEN 0 AND 3)", nativeQuery = true)
-    void addStatoApprovazioneConstraint();
+    Richiesta deleteById(int id);
+
+    // List<Richiesta> findByCommessaId(int commessaOsId);
+
+   
 }

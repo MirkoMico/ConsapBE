@@ -6,7 +6,7 @@ import com.proggettazione.richiesteConsapBE.model.StatoRichiestaConsap;
 import java.util.List;
 
 public interface StatoRichiestaConsapService {
-   /* List<StatoRichiestaConsap> getStati();
+
     StatoRichiestaConsap saveStato(StatoRichiestaConsap statoRichiestaConsap);
-    StatoRichiestaConsap getIdStatoByRichiesta(Richiesta richiesta);*/
+
 }

@@ -10,6 +10,6 @@ public class StatoApprovazioneOs {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int statoApprovazioneOsId;
-    private String descStatoApprovazioneOsId;
+    private String descStatoApprovazioneOs;
 
 }

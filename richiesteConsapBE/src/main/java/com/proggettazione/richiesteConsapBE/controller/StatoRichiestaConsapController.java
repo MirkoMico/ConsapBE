@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/stato")
+@RequestMapping("/statoRichiestaConsap")
 public class StatoRichiestaConsapController {
 
     @Autowired
@@ -20,10 +20,10 @@ public class StatoRichiestaConsapController {
     @GetMapping
     List<StatoRichiestaConsap> getAllStati(){
         return statoServiceImpl.getStati();
-    }
+    }*/
 
     @PostMapping
-    ResponseEntity<StatoRichiestaConsap> saveStato(@RequestBody StatoRichiestaConsap statoRichiestaConsap){
+    ResponseEntity<StatoRichiestaConsap> saveStato(@RequestBody StatoRichiestaConsap statoRichiestaConsap) {
         return new ResponseEntity<StatoRichiestaConsap>(statoServiceImpl.saveStato(statoRichiestaConsap), HttpStatus.OK);
-    }*/
+    }
 }

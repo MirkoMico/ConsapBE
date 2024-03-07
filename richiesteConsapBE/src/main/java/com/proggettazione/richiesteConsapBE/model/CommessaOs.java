@@ -9,6 +9,6 @@ import lombok.Data;
 public class CommessaOs {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int commessaOSId;
-    private String descCommesssaOS;
+    private int commessaOsId;
+    private String descCommessaOS;
 }

@@ -15,23 +15,54 @@ public class RichiestaController {
 
     @Autowired
     RichiestaServiceImpl richiestaServiceImpl;
-   /* @GetMapping
-    @CrossOrigin(origins="http://localhost:4200", allowedHeaders = "*")
+   @GetMapping
+  //  @CrossOrigin(origins="http://localhost:4200", allowedHeaders = "*")
     public List<Richiesta> getAllRichieste(){
         return richiestaServiceImpl.getRichieste();
     }
 
     @PostMapping
     public ResponseEntity<Richiesta> saveRichiesta(@RequestBody Richiesta richiesta){
-    return  new ResponseEntity<Richiesta>(richiestaServiceImpl.saveRichiesta(richiesta), HttpStatus.OK);
+    return  new ResponseEntity<Richiesta>(richiestaServiceImpl.saveRichiesta(richiesta), HttpStatus.CREATED);
     }
         @PutMapping("/{id}")
-        @CrossOrigin(origins="http://localhost:4200", allowedHeaders = "*")
+       // @CrossOrigin(origins="http://localhost:4200", allowedHeaders = "*")
         public ResponseEntity<Richiesta> putRichiesta(@PathVariable int id,
                                                       @RequestBody Richiesta richiesta){
-            int statoId = richiesta.getStato().getId();
-            System.out.println(statoId + "statoID");
+           // int applicativoId = richiesta.getApplicativo().getApplicativoId();
+
             return new ResponseEntity<Richiesta>(richiestaServiceImpl.putRichiesta(richiesta,id
             ),HttpStatus.OK);
-        }*/
+        }
+
+        @GetMapping("/{id}")
+    public ResponseEntity getRichiestaById(@PathVariable int id){
+            try {
+                return  ResponseEntity.status(HttpStatus.OK).body(richiestaServiceImpl.getRichiestaById(id));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+        @DeleteMapping("/{id}")
+        public ResponseEntity deleteRichiestaById(@PathVariable int id){
+       try{
+           return ResponseEntity.status(HttpStatus.OK).body(richiestaServiceImpl.deleteRichiestaById(id));
+       }catch (Exception e){
+           throw new RuntimeException(e);
+       }
+        }
+
+        @GetMapping("/numeroTicket/{numeroTicket}")
+    public ResponseEntity getRichiesteByNumeroticket(@PathVariable int numeroTicket){
+            try {
+                return  ResponseEntity.status(HttpStatus.OK).body(richiestaServiceImpl.
+                        getRichiestaByNumeroTicket(numeroTicket));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
+        }
+
+
+
 }

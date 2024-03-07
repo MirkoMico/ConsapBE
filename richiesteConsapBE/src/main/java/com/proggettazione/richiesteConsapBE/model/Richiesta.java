@@ -1,5 +1,6 @@
 package com.proggettazione.richiesteConsapBE.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -7,6 +8,7 @@ import java.util.Date;
 
 @Data
 @Entity
+@Table
 public class Richiesta {
 
     @Id
@@ -23,21 +25,23 @@ public class Richiesta {
     @JoinColumn(name = "statoApprovazioneConsapId",referencedColumnName = "statoApprovazioneConsapId")
     private StatoApprovazioneConsap statoApprovazioneConsap;
     private String oggetto;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date dataCreazione;
     @ManyToOne
     @JoinColumn(name = "statoApprovazioneOsId",referencedColumnName = "statoApprovazioneOsId")
     private StatoApprovazioneOs statoApprovazioneOs;
     @ManyToOne
     @JoinColumn(name = "statoRichiestaOsId",referencedColumnName = "statoRichiestaOsId")
-    private StatoRichiestaOs statoRichiestaOS;
-    private Date dataStimaFinale;
+    private StatoRichiestaOs statoRichiestaOs;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date dataStimaFine;
     private double importo;
     @ManyToOne
     @JoinColumn(name = "commessaOSId",referencedColumnName = "commessaOSId")
     private CommessaOs commessaOs;
 
 
-    private String UtenteCreazione;
+    private String UtenteInserimento;
     private String UtenteModifica;
     private Date dataInserimento;
     private Date dataModifica;

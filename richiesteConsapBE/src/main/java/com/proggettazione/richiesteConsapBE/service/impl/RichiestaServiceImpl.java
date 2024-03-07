@@ -1,10 +1,14 @@
 package com.proggettazione.richiesteConsapBE.service.impl;
 
-import com.proggettazione.richiesteConsapBE.repository.RichiestaRepository;
-import com.proggettazione.richiesteConsapBE.repository.StatoRichiestaConsapRepository;
+import com.proggettazione.richiesteConsapBE.model.*;
+import com.proggettazione.richiesteConsapBE.repository.*;
 import com.proggettazione.richiesteConsapBE.service.RichiestaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 
 @Service
@@ -14,68 +18,117 @@ public class RichiestaServiceImpl implements RichiestaService {
     RichiestaRepository richiestaRepository;
 
     @Autowired
-    StatoRichiestaConsapServiceImpl statoServiceImpl;
-
-    @Autowired
     StatoRichiestaConsapRepository statoRichiestaConsapRepository;
+    @Autowired
+    StatoApprovazioneConsapRepository statoApprovazioneConsapRepository;
 
     @Autowired
     UtenteServiceImpl utenteServiceImpl;
+    @Autowired
+    ApplicativoRepository applicativoRepository;
+    @Autowired
+    StatoApprovazioneOsRepository statoApprovazioneOsRepository;
+    @Autowired
+    StatoRichiestaOsRepository statoRichiestaOsRepository;
+    @Autowired
+    CommessaOsRepository commessaOsRepository;
 
-  /*  @Override
 
+    @Override
     public Richiesta saveRichiesta(Richiesta richiesta) {
-        Richiesta nuovaRichiesta = new Richiesta(
-        );
-        Stato stato = statoRepository.
-                findById(richiesta.getStato().getId())
+            Richiesta nuovaRichiesta = new Richiesta(
+            );
+        Applicativo applicativo = applicativoRepository.findById(richiesta.getApplicativo().getApplicativoId())
                 .orElse(null);
-        nuovaRichiesta.setIdCommessa(richiesta.getIdCommessa());
-        nuovaRichiesta.setStato(stato);
-        nuovaRichiesta.setDataCreazione(richiesta.getDataCreazione());
+        StatoRichiestaConsap statoRichiestaConsap= statoRichiestaConsapRepository.
+                findById(richiesta.getStatoRichiestaConsap().getStatoRichiestaConsapId())
+                .orElse(null);
+        StatoApprovazioneConsap statoApprovazioneConsap=statoApprovazioneConsapRepository.
+                findById(richiesta.getStatoApprovazioneConsap().getStatoApprovazioneConsapId())
+                .orElse(null);
+        StatoApprovazioneOs statoApprovazioneOs=statoApprovazioneOsRepository.
+                findById(richiesta.getStatoApprovazioneOs().getStatoApprovazioneOsId())
+                .orElse(null);
+        StatoRichiestaOs statoRichiestaOs=statoRichiestaOsRepository.
+                findById(richiesta.getStatoRichiestaOs().getStatoRichiestaOsId())
+                .orElse(null);
+        CommessaOs commessaOs=commessaOsRepository.findById(richiesta.getCommessaOs().getCommessaOsId())
+                .orElse(null);
+        nuovaRichiesta.setNumeroTicket(richiesta.getNumeroTicket());
+        nuovaRichiesta.setApplicativo(applicativo);
         nuovaRichiesta.setOggetto(richiesta.getOggetto());
-        nuovaRichiesta.setStatoApprovazione(richiesta.getStatoApprovazione());
-        nuovaRichiesta.setCampo1(richiesta.getCampo1());
-        nuovaRichiesta.setCampo2(richiesta.getCampo2());
-        nuovaRichiesta.setCampo3(richiesta.getCampo3());
-        nuovaRichiesta.setCampo4(richiesta.getCampo4());
-        nuovaRichiesta.setDataInserimento(richiesta.getDataInserimento());
-        nuovaRichiesta.setDataModifica(richiesta.getDataModifica());
-        nuovaRichiesta.setUtenteCreazione(richiesta.getUtenteCreazione());
-        nuovaRichiesta.setUtenteModifica(richiesta.getUtenteModifica());
+        nuovaRichiesta.setStatoRichiestaConsap(statoRichiestaConsap);
+        nuovaRichiesta.setDataCreazione(richiesta.getDataCreazione());
+        nuovaRichiesta.setStatoApprovazioneConsap(statoApprovazioneConsap);
+        nuovaRichiesta.setStatoApprovazioneOs(statoApprovazioneOs);
+        nuovaRichiesta.setStatoRichiestaOs(statoRichiestaOs);
+        nuovaRichiesta.setDataStimaFine(richiesta.getDataStimaFine());
+        nuovaRichiesta.setImporto(richiesta.getImporto());
+        nuovaRichiesta.setCommessaOs(commessaOs);
+
         return richiestaRepository.save(nuovaRichiesta);
     }
-
-
 
     @Override
     public List<Richiesta> getRichieste() {
         return richiestaRepository.findAll();
     }
-    @Override
-    public Richiesta getRichiesta(int id) {
-        return richiestaRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Richiesta non trovata con ID: " + id));
-    }
-    @Override
-    public Richiesta putRichiesta(Richiesta richiesta,int id) {
-        Richiesta existingRichiesta = richiestaRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Richiesta non trovata con ID: " + id));
-        existingRichiesta.setIdCommessa(richiesta.getIdCommessa());
-        existingRichiesta.setStato(richiesta.getStato());
-        existingRichiesta.setDataCreazione(richiesta.getDataCreazione());
-        existingRichiesta.setOggetto(richiesta.getOggetto());
-        existingRichiesta.setStatoApprovazione(richiesta.getStatoApprovazione());
-        existingRichiesta.setCampo1(richiesta.getCampo1());
-        existingRichiesta.setCampo2(richiesta.getCampo2());
-        existingRichiesta.setCampo3(richiesta.getCampo3());
-        existingRichiesta.setCampo4(richiesta.getCampo4());
-        existingRichiesta.setDataInserimento(richiesta.getDataInserimento());
-        existingRichiesta.setDataModifica(richiesta.getDataModifica());
-        existingRichiesta.setUtenteCreazione(richiesta.getUtenteCreazione());
-        existingRichiesta.setUtenteModifica(richiesta.getUtenteModifica());
-        richiestaRepository.save(existingRichiesta);
-        return existingRichiesta;
-    }*/
 
-}
+    @Override
+    public Optional<Richiesta> getRichiestaById(int id)throws Exception {
+
+        Optional<Richiesta> optionalRichiesta = richiestaRepository.findById(id);
+        if (optionalRichiesta.isEmpty()){
+            throw new Exception("La richiesta n: " + id + "non è stata trovata");
+        }
+        return optionalRichiesta;
+
+
+    }
+
+
+
+    @Override
+    public Richiesta putRichiesta(Richiesta richiesta, int id) {
+
+        Richiesta richiesta1 = richiestaRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Richiesta non trovata con ID: " + id));
+       // richiesta1.setNumeroTicket(richiesta.getNumeroTicket());
+        richiesta1.setApplicativo(richiesta.getApplicativo());
+       // richiesta1.setOggetto(richiesta.getOggetto());
+        richiesta1.setStatoRichiestaConsap(richiesta.getStatoRichiestaConsap());
+      //  richiesta1.setDataCreazione(richiesta.getDataCreazione());
+        richiesta1.setStatoApprovazioneConsap(richiesta.getStatoApprovazioneConsap());
+        richiesta1.setStatoApprovazioneOs(richiesta.getStatoApprovazioneOs());
+        richiesta1.setStatoRichiestaOs(richiesta.getStatoRichiestaOs());
+        richiesta1.setDataStimaFine(richiesta.getDataStimaFine());
+        richiesta1.setImporto(richiesta.getImporto());
+        richiesta1.setCommessaOs(richiesta.getCommessaOs());
+
+        richiestaRepository.save(richiesta1);
+        return richiesta1;
+    }
+
+    @Override
+    public Richiesta deleteRichiestaById(int id) {
+        return richiestaRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<Richiesta> getRichiestaByNumeroTicket(int numeroTicket) throws Exception {
+
+        Optional<Richiesta> optionalRichiesta = richiestaRepository.findByNumeroTicket(numeroTicket);
+        if (optionalRichiesta.isEmpty()) {
+            throw new Exception("Il numero ticket : " + numeroTicket + "non è stato trovato");
+
+        }
+        return optionalRichiesta;
+    }
+
+
+
+
+
+
+
+    }

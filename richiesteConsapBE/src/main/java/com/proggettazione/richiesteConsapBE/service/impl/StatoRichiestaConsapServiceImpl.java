@@ -1,5 +1,6 @@
 package com.proggettazione.richiesteConsapBE.service.impl;
 
+import com.proggettazione.richiesteConsapBE.model.StatoRichiestaConsap;
 import com.proggettazione.richiesteConsapBE.repository.RichiestaRepository;
 import com.proggettazione.richiesteConsapBE.repository.StatoRichiestaConsapRepository;
 import com.proggettazione.richiesteConsapBE.service.StatoRichiestaConsapService;
@@ -16,6 +17,11 @@ public class StatoRichiestaConsapServiceImpl implements StatoRichiestaConsapServ
 
     @Autowired
     StatoRichiestaConsapRepository statoRichiestaConsapRepository;
+
+    @Override
+    public StatoRichiestaConsap saveStato(StatoRichiestaConsap statoRichiestaConsap) {
+        return statoRichiestaConsapRepository.save(statoRichiestaConsap);
+    }
   /*  @Override
     public List<StatoRichiestaConsap> getStati() {
         return statoRepository.findAll();
