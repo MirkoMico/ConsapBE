@@ -13,7 +13,9 @@ public interface RichiestaService {
     Richiesta putRichiesta(Richiesta richiesta,int id);
     Richiesta deleteRichiestaById(int id);
 
-   // List<Richiesta> getAllRichiestaBynumeroTicket(int numeroTicket);
+    List<Richiesta> getAllRichiestaByCommeaaOsId(int commessaOsId) throws Exception;
+
+    List<Richiesta> getAllRichiestaByApplicativoId(int applicativoId) throws Exception;
 
     Optional<Richiesta> getRichiestaByNumeroTicket(int numeroTicket) throws Exception;
 

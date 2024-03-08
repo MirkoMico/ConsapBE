@@ -115,6 +115,27 @@ public class RichiestaServiceImpl implements RichiestaService {
     }
 
     @Override
+    public List<Richiesta> getAllRichiestaByCommeaaOsId(int commessaOsId)throws  Exception {
+        List<Richiesta> optionalList = richiestaRepository.findAllByCommessaIdCustomQ(commessaOsId);
+        if (optionalList.isEmpty()) {
+            throw new Exception("commessa non trovata");
+        }
+       // logger.info("Slot found");
+        return optionalList;
+
+
+    }
+
+    @Override
+    public List<Richiesta> getAllRichiestaByApplicativoId(int applicativoId) throws Exception {
+        List<Richiesta> optionalListAppl= richiestaRepository.findAllByApplicativoCustomQ(applicativoId);
+        if (optionalListAppl.isEmpty()) {
+            throw new Exception("applicativo non trovato");
+        }
+        return optionalListAppl;
+    }
+
+    @Override
     public Optional<Richiesta> getRichiestaByNumeroTicket(int numeroTicket) throws Exception {
 
         Optional<Richiesta> optionalRichiesta = richiestaRepository.findByNumeroTicket(numeroTicket);

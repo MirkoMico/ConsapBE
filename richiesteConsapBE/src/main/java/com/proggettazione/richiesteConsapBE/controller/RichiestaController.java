@@ -63,6 +63,24 @@ public class RichiestaController {
 
         }
 
+        @GetMapping("/commessa/{commessaOsId}")
+    public List<Richiesta> getAllRichiesteByCommessa(@PathVariable int commessaOsId){
+       try{
+           return richiestaServiceImpl.getAllRichiestaByCommeaaOsId(commessaOsId);
+       }catch (Exception e) {
+           throw new RuntimeException(e);
+
+       }
+        }
+        @GetMapping("/applicativo/{applicativoId}")
+    public List<Richiesta> getAllRichiestaByApplicativo(@PathVariable int applicativoId){
+       try {
+           return richiestaServiceImpl.getAllRichiestaByApplicativoId(applicativoId);
+       }catch (Exception e) {
+           throw new RuntimeException(e);
+       }
+        }
+
 
 
 }
