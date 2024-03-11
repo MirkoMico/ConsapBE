@@ -7,6 +7,8 @@ import com.proggettazione.richiesteConsapBE.service.StatoRichiestaConsapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StatoRichiestaConsapServiceImpl implements StatoRichiestaConsapService {
 
@@ -21,6 +23,11 @@ public class StatoRichiestaConsapServiceImpl implements StatoRichiestaConsapServ
     @Override
     public StatoRichiestaConsap saveStato(StatoRichiestaConsap statoRichiestaConsap) {
         return statoRichiestaConsapRepository.save(statoRichiestaConsap);
+    }
+
+    @Override
+    public List<StatoRichiestaConsap> getAllStatoRichiestaConsap() {
+        return statoRichiestaConsapRepository.findAll();
     }
   /*  @Override
     public List<StatoRichiestaConsap> getStati() {

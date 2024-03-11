@@ -10,5 +10,6 @@ public class CommessaOs {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int commessaOsId;
+    private String numeroCommessa;
     private String descCommessaOS;
 }

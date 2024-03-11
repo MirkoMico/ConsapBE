@@ -6,6 +6,8 @@ import com.proggettazione.richiesteConsapBE.service.StatoApprovazioneOsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StatoApprovazioneOsServiceImpl implements StatoApprovazioneOsService {
 
@@ -14,5 +16,10 @@ public class StatoApprovazioneOsServiceImpl implements StatoApprovazioneOsServic
     @Override
     public StatoApprovazioneOs saveStatoApprovazioneOs(StatoApprovazioneOs statoApprovazioneOs) {
         return statoApprovazioneOsRepository.save(statoApprovazioneOs);
+    }
+
+    @Override
+    public List<StatoApprovazioneOs> getStatoApprovazioneOs() {
+        return statoApprovazioneOsRepository.findAll();
     }
 }

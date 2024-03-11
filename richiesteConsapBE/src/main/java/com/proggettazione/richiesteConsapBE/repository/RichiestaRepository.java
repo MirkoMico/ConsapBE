@@ -17,7 +17,7 @@ public interface RichiestaRepository extends JpaRepository<Richiesta,Integer> {
 
     Richiesta deleteById(int id);
 //select u from User u where u.emailAddress = ?1
-    @Query("SELECT r FROM Richiesta r WHERE r.commessaOs.commessaOsId = :commessaOsId")
+    @Query("SELECT r FROM Richiesta r WHERE r.commessaOs.commessaOsId = :commessaOsId "  )
     List<Richiesta> findAllByCommessaIdCustomQ(@Param("commessaOsId")int commessaOsId);
 
     @Query("SELECT r FROM Richiesta r WHERE r.applicativo.applicativoId = :applicativoId")

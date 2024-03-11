@@ -6,6 +6,8 @@ import com.proggettazione.richiesteConsapBE.service.StatoApprovazioneConsapServi
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StatoApprovazioneConsapServiceImpl implements StatoApprovazioneConsapService {
 
@@ -14,5 +16,10 @@ public class StatoApprovazioneConsapServiceImpl implements StatoApprovazioneCons
     @Override
     public StatoApprovazioneConsap saveStatoApprovazioneConsap(StatoApprovazioneConsap statoApprovazioneConsap) {
         return statoApprovazioneConsapRepository.save(statoApprovazioneConsap) ;
+    }
+
+    @Override
+    public List<StatoApprovazioneConsap> getStatoApprovazioneComsap() {
+        return statoApprovazioneConsapRepository.findAll();
     }
 }

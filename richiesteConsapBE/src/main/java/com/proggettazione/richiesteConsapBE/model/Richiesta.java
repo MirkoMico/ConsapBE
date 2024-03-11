@@ -14,6 +14,7 @@ public class Richiesta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(unique = true)
     private int numeroTicket ;
     @ManyToOne
     @JoinColumn(name="statoRichiestaConsapId",referencedColumnName = "statoRichiestaConsapId")

@@ -6,6 +6,8 @@ import com.proggettazione.richiesteConsapBE.service.StatoRichiestaOsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StatoRichiestaOsServiceImpl implements StatoRichiestaOsService {
 
@@ -14,5 +16,10 @@ public class StatoRichiestaOsServiceImpl implements StatoRichiestaOsService {
     @Override
     public StatoRichiestaOs saveStatoRichiestaOs(StatoRichiestaOs statoRichiestaOs) {
         return statoRichiestaOsRepository.save(statoRichiestaOs);
+    }
+
+    @Override
+    public List<StatoRichiestaOs> getAllStatoRichiestaOs() {
+        return statoRichiestaOsRepository.findAll();
     }
 }

@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/utente")
+@CrossOrigin(origins="http://localhost:4200", allowedHeaders = "*")
 public class UtenteController {
     @Autowired
     UtenteServiceImpl utenteServiceImpl;

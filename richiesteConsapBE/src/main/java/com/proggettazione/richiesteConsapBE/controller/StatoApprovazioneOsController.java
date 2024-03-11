@@ -6,13 +6,13 @@ import com.proggettazione.richiesteConsapBE.service.impl.StatoApprovazioneOsServ
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/statoApprovazioneOs")
+@CrossOrigin(origins="http://localhost:4200", allowedHeaders = "*")
 public class StatoApprovazioneOsController {
 
     @Autowired
@@ -24,5 +24,10 @@ public class StatoApprovazioneOsController {
         return new ResponseEntity<StatoApprovazioneOs>(statoApprovazioneOsServiceImpl.
                 saveStatoApprovazioneOs(statoApprovazioneOs), HttpStatus.OK);
 
+    }
+
+    @GetMapping
+    public List<StatoApprovazioneOs> getall(){
+        return statoApprovazioneOsServiceImpl.getStatoApprovazioneOs();
     }
 }

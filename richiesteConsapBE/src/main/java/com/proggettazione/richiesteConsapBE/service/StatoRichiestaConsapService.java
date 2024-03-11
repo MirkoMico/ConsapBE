@@ -9,4 +9,6 @@ public interface StatoRichiestaConsapService {
 
     StatoRichiestaConsap saveStato(StatoRichiestaConsap statoRichiestaConsap);
 
+    List<StatoRichiestaConsap> getAllStatoRichiestaConsap();
+
 }
