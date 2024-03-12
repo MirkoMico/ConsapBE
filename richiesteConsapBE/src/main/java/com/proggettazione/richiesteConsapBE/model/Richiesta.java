@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Data
 @Entity
@@ -26,7 +26,7 @@ public class Richiesta {
     @JoinColumn(name = "statoApprovazioneConsapId",referencedColumnName = "statoApprovazioneConsapId")
     private StatoApprovazioneConsap statoApprovazioneConsap;
     private String oggetto;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+ //   @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date dataCreazione;
     @ManyToOne
     @JoinColumn(name = "statoApprovazioneOsId",referencedColumnName = "statoApprovazioneOsId")
@@ -34,7 +34,7 @@ public class Richiesta {
     @ManyToOne
     @JoinColumn(name = "statoRichiestaOsId",referencedColumnName = "statoRichiestaOsId")
     private StatoRichiestaOs statoRichiestaOs;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+   // @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date dataStimaFine;
     private double importo;
     @ManyToOne
