@@ -54,6 +54,7 @@ public class RichiestaServiceImpl implements RichiestaService {
                 .orElse(null);
         CommessaOs commessaOs=commessaOsRepository.findById(richiesta.getCommessaOs().getCommessaOsId())
                 .orElse(null);
+
         nuovaRichiesta.setNumeroTicket(richiesta.getNumeroTicket());
         nuovaRichiesta.setApplicativo(applicativo);
         nuovaRichiesta.setOggetto(richiesta.getOggetto());
