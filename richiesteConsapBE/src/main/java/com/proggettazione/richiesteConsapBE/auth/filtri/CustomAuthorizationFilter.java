@@ -19,7 +19,7 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
-@Slf4j
+
 public class CustomAuthorizationFilter extends OncePerRequestFilter {
 
     @Override
@@ -39,7 +39,7 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
                     filterChain.doFilter(request, response);
                 }
                 catch (Exception e) {
-                    log.error(String.format("Error auth token: %s", token), e);
+
                     response.setStatus(FORBIDDEN.value());
                     Map<String, String> error = new HashMap<>();
                     error.put("errorMessage", e.getMessage());

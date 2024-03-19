@@ -14,8 +14,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-@EnableMethodSecurity
-@RequiredArgsConstructor
+//@EnableMethodSecurity
+//@RequiredArgsConstructor
 public class SecurityConfig{
 
     @Bean
@@ -31,9 +31,13 @@ public class SecurityConfig{
                 .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers(HttpMethod.POST, "/login/**").permitAll()
-                        .requestMatchers("/registrazione/**").permitAll()
-                        .requestMatchers("/v3/**", "/configuration/**", "/swagger-resources/**", "/swagger-ui/**", "/swagger-ui.html", "/webjars/**", "/api-docs/**").permitAll()
-                        .anyRequest().authenticated()
+                      //  .requestMatchers("/registrazione/**").permitAll()
+                    //    .requestMatchers(HttpMethod.POST,"/richiesta").authenticated()
+                        .requestMatchers("/**").authenticated()
+                    //    .requestMatchers("/v3/**", "/configuration/**", "/swagger-resources/**", "/swagger-ui/**", "/swagger-ui.html", "/webjars/**", "/api/**").permitAll()
+                   //  .requestMatchers(HttpMethod.POST, "/users/**").hasRole("ADMIN")
+                 //       .requestMatchers(HttpMethod.POST, "/addRoleToUser").hasAuthority("ROLE_ADMIN")
+                   //     .anyRequest().authenticated()
                 )
                 .addFilter(new CustomAuthenticationFilter(authenticationManager))
                 .addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)

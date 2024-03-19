@@ -9,7 +9,11 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.security.access.AuthorizationServiceException;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,6 +31,32 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import com.proggettazione.richiesteConsapBE.auth.RoleEntity;
+import com.proggettazione.richiesteConsapBE.model.UserEntity;
+import com.proggettazione.richiesteConsapBE.repository.RoleRepository;
+import com.proggettazione.richiesteConsapBE.repository.UserRepository;
+import com.proggettazione.richiesteConsapBE.service.UserService;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AuthorizationServiceException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+
 
 
 
@@ -39,9 +69,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 
     private static final String USER_NOT_FOUND_MESSAGE = "User with username %s not found";
+    @Autowired
+    UserRepository userRepository;
 
-    private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
+    @Autowired
+     RoleRepository roleRepository;
+
     private final PasswordEncoder passwordEncoder;
 
 
@@ -54,12 +87,24 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
 
+
     @Override
     public UserEntity addRoleToUser(String username, String roleName) {
         log.info("Adding role {} to user {}", roleName, username);
         UserEntity userEntity = userRepository.findByUsername(username);
+        System.out.println(userEntity+"primo ciao");
         RoleEntity roleEntity = roleRepository.findByName(roleName);
-        userEntity.getRoles().add(roleEntity);
+
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth+ "ciao");
+        System.out.println(auth.getPrincipal()+"ciao2");
+        if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+            userEntity.getRoles().add(roleEntity);
+        }else{
+            throw  new AuthorizationServiceException("Non hai i permessi!");
+        }
+
         return userEntity;
     }
 

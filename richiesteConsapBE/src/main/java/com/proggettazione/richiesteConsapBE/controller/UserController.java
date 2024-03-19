@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -16,7 +17,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
-@Slf4j
 public class UserController {
 
     @Autowired
@@ -40,9 +40,9 @@ public class UserController {
         return ResponseEntity.created(uri).build();
     }
 
-
+   @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/{username}/addRoleToUser")
-    public ResponseEntity<?> addRoleToUser(@PathVariable String username, @RequestBody RoleDTO request) {
+    public ResponseEntity<?> addRoleToUser(@PathVariable String username, @RequestBody RoleDTO request) throws IllegalAccessException {
         UserEntity userEntity = userService.addRoleToUser(username, request.getRoleName());
         return ResponseEntity.ok(userEntity);
     }

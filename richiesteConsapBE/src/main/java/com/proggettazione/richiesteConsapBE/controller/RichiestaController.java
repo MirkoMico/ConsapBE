@@ -2,15 +2,18 @@ package com.proggettazione.richiesteConsapBE.controller;
 
 import com.proggettazione.richiesteConsapBE.model.Richiesta;
 import com.proggettazione.richiesteConsapBE.service.impl.RichiestaServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/richiesta")
+@Slf4j
 @CrossOrigin(origins="http://localhost:4200", allowedHeaders = "*")
 public class RichiestaController {
 
@@ -21,9 +24,10 @@ public class RichiestaController {
     public List<Richiesta> getAllRichieste(){
         return richiestaServiceImpl.getRichieste();
     }
-
+    //@PreAuthorize("hasRole('USER')")
     @PostMapping
     public ResponseEntity<Richiesta> saveRichiesta(@RequestBody Richiesta richiesta){
+        System.out.println(richiesta.toString()+ "richiesta");
     return  new ResponseEntity<Richiesta>(richiestaServiceImpl.saveRichiesta(richiesta), HttpStatus.CREATED);
     }
         @PutMapping("/{id}")

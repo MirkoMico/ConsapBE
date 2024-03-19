@@ -66,6 +66,7 @@ public class RichiestaServiceImpl implements RichiestaService {
         nuovaRichiesta.setDataStimaFine(richiesta.getDataStimaFine());
         nuovaRichiesta.setImporto(richiesta.getImporto());
         nuovaRichiesta.setCommessaOs(commessaOs);
+        System.out.println(nuovaRichiesta.toString()+ "richiesta");
 
         return richiestaRepository.save(nuovaRichiesta);
     }
