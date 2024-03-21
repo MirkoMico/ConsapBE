@@ -6,6 +6,7 @@ import com.proggettazione.richiesteConsapBE.service.RichiestaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -59,7 +60,7 @@ public class RichiestaServiceImpl implements RichiestaService {
         nuovaRichiesta.setApplicativo(applicativo);
         nuovaRichiesta.setOggetto(richiesta.getOggetto());
         nuovaRichiesta.setStatoRichiestaConsap(statoRichiestaConsap);
-        nuovaRichiesta.setDataCreazione(richiesta.getDataCreazione());
+        nuovaRichiesta.setDataCreazione(LocalDate.now());
         nuovaRichiesta.setStatoApprovazioneConsap(statoApprovazioneConsap);
         nuovaRichiesta.setStatoApprovazioneOs(statoApprovazioneOs);
         nuovaRichiesta.setStatoRichiestaOs(statoRichiestaOs);

@@ -96,14 +96,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         RoleEntity roleEntity = roleRepository.findByName(roleName);
 
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    /*    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(auth+ "ciao");
         System.out.println(auth.getPrincipal()+"ciao2");
         if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
             userEntity.getRoles().add(roleEntity);
         }else{
             throw  new AuthorizationServiceException("Non hai i permessi!");
-        }
+        }*/
 
         return userEntity;
     }

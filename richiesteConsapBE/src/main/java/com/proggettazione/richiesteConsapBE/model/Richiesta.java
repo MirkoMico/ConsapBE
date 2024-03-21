@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -27,7 +28,7 @@ public class Richiesta {
     private StatoApprovazioneConsap statoApprovazioneConsap;
     private String oggetto;
  //   @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private Date dataCreazione;
+    private LocalDate dataCreazione;
     @ManyToOne
     @JoinColumn(name = "statoApprovazioneOsId",referencedColumnName = "statoApprovazioneOsId")
     private StatoApprovazioneOs statoApprovazioneOs;
