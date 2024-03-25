@@ -10,11 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/log")
+@RequestMapping("/auth")
 @RequiredArgsConstructor
 public class TokenController {
     @Autowired
     private final TokenService tokenService;
+
+    @Autowired
+    private AuthService authService;
 
 
     @Autowired
@@ -25,6 +28,25 @@ public class TokenController {
         Token token= new Token(authRequest.getDescrizione(), userService.findByUsername(authRequest.getUsername()));
         return ResponseEntity.ok(tokenService.addToken(token));
     }
+
+
+    @PostMapping("/signup")
+    public ResponseEntity<AuthRequest> signUp(@RequestBody AuthRequest signUpRequest){
+        return ResponseEntity.ok(authService.signUp(signUpRequest));
+    }
+
+    @PostMapping("/log")
+    public ResponseEntity<AuthRequest>login(@RequestBody AuthRequest resp){
+        System.out.println("ciao"+resp);
+        return ResponseEntity.ok(authService.login(resp));
+
+    }
+    @PostMapping("/refresh")
+    public ResponseEntity<AuthRequest> refreshToken(@RequestBody AuthRequest refreshTokenRequest){
+        return ResponseEntity.ok(authService.refreshToken(refreshTokenRequest));
+    }
+
+
 
 
 

@@ -122,6 +122,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntity user = userRepository.findByUsername(username);
+
+
         if(user == null) {
             String message = String.format(USER_NOT_FOUND_MESSAGE, username);
             log.error(message);
@@ -129,9 +131,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         } else {
             log.debug("User found in the database: {}", username);
             Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-            user.getRoles().forEach(role -> {
-                authorities.add(new SimpleGrantedAuthority(role.getName()));
-            });
+         //   user.getRoles().forEach(role -> {
+           //     authorities.add(new SimpleGrantedAuthority(role.getName()));
+           // });
             return new User(user.getUsername(), user.getPassword(), authorities);
         }
     }

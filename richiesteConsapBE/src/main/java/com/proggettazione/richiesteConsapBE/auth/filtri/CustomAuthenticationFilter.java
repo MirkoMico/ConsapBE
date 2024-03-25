@@ -1,4 +1,4 @@
-package com.proggettazione.richiesteConsapBE.auth.filtri;
+/*package com.proggettazione.richiesteConsapBE.auth.filtri;
 import com.proggettazione.richiesteConsapBE.auth.JwtUtil;
 import com.proggettazione.richiesteConsapBE.auth.token.AuthRequest;
 import com.proggettazione.richiesteConsapBE.auth.token.Token;
@@ -112,6 +112,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         User user = (User) authentication.getPrincipal();
         String accessToken = JwtUtil.createAccessToken(user.getUsername(), request.getRequestURL().toString(),
                 user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()));
+        System.out.println("USER IS: "+ user + "token: " +accessToken );
 
        // AuthRequest authRequest = new AuthRequest(); // crea un'istanza di AuthRequest con i dati necessari
        // authRequest.setUsername(user.getUsername());
@@ -125,6 +126,9 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
         response.addHeader("access_token", accessToken);
         response.addHeader("refresh_token", refreshToken);
+        response.addHeader("user", user.getUsername());
+
+
 
 
     }
@@ -142,4 +146,4 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
 
 
-}
+}*/
