@@ -4,6 +4,8 @@ import com.proggettazione.richiesteConsapBE.model.*;
 import com.proggettazione.richiesteConsapBE.repository.*;
 import com.proggettazione.richiesteConsapBE.service.RichiestaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -66,13 +68,17 @@ public class RichiestaServiceImpl implements RichiestaService {
         nuovaRichiesta.setDataStimaFine(richiesta.getDataStimaFine());
         nuovaRichiesta.setImporto(richiesta.getImporto());
         nuovaRichiesta.setCommessaOs(commessaOs);
+        nuovaRichiesta.setDataInserimento(richiesta.getDataInserimento());
+        nuovaRichiesta.setUtenteInserimento(richiesta.getUtenteInserimento());
+        nuovaRichiesta.setDataModifica(richiesta.getDataModifica());
+        nuovaRichiesta.setUtenteModifica(richiesta.getUtenteModifica());
 
         return richiestaRepository.save(nuovaRichiesta);
     }
 
     @Override
-    public List<Richiesta> getRichieste() {
-        return richiestaRepository.findAll();
+    public Page<Richiesta> getRichieste(Pageable pageable) {
+        return richiestaRepository.findAll(pageable);
     }
 
     @Override
@@ -105,6 +111,8 @@ public class RichiestaServiceImpl implements RichiestaService {
         richiesta1.setDataStimaFine(richiesta.getDataStimaFine());
         richiesta1.setImporto(richiesta.getImporto());
         richiesta1.setCommessaOs(richiesta.getCommessaOs());
+        richiesta1.setDataModifica(richiesta.getDataModifica());
+        richiesta1.setUtenteModifica(richiesta.getUtenteModifica());
 
         richiestaRepository.save(richiesta1);
         return richiesta1;

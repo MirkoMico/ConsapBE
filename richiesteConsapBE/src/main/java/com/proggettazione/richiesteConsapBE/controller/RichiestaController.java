@@ -1,13 +1,19 @@
 package com.proggettazione.richiesteConsapBE.controller;
 
 import com.proggettazione.richiesteConsapBE.model.Richiesta;
+import com.proggettazione.richiesteConsapBE.repository.RichiestaRepository;
+import com.proggettazione.richiesteConsapBE.service.RichiestaService;
 import com.proggettazione.richiesteConsapBE.service.impl.RichiestaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/richiesta")
@@ -16,10 +22,30 @@ public class RichiestaController {
 
     @Autowired
     RichiestaServiceImpl richiestaServiceImpl;
-   @GetMapping
+
+    @Autowired
+    RichiestaService richiestaService;
+
+    @Autowired
+    RichiestaRepository richiestaRepository;
+   //@GetMapping
   //  @CrossOrigin(origins="http://localhost:4200", allowedHeaders = "*")
-    public List<Richiesta> getAllRichieste(){
-        return richiestaServiceImpl.getRichieste();
+   // public List<Richiesta> getAllRichieste(){
+   //     return richiestaServiceImpl.getRichieste();
+   // }
+
+    @GetMapping("/page")
+    public Page<Richiesta>get (@RequestParam(required = false)Optional<Integer> page,
+                               @RequestParam(required = false)Optional<Integer> size){
+        if(page.isPresent() && size.isPresent()){
+            Pageable pageable = PageRequest.of(page.get(),size.get());
+            Page<Richiesta> pageRichieste = richiestaService.getRichieste(pageable);
+            return pageRichieste;
+        }else{
+            Page<Richiesta> pageRichieste2 = Page.empty();
+            return pageRichieste2;
+        }
+
     }
 
     @PostMapping
